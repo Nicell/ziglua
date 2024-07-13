@@ -7,7 +7,7 @@ const c = @cImport({
 
     if (lang != .luau) @cInclude("lauxlib.h");
     if (lang == .luau) @cInclude("luacode.h");
-    if (lang == .luau) @cInclude("luaucodegen.h");
+    if (lang == .luau) @cInclude("luacodegen.h");
     if (lang == .luajit) @cInclude("luajit.h");
 });
 
