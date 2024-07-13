@@ -56,6 +56,7 @@ pub fn build(b: *Build) void {
 
     switch (lang) {
         .luau => {
+            ziglua.addIncludePath(upstream.path("CodeGen/include"));
             ziglua.addIncludePath(upstream.path("Common/include"));
             ziglua.addIncludePath(upstream.path("Compiler/include"));
             ziglua.addIncludePath(upstream.path("Ast/include"));
@@ -200,6 +201,7 @@ fn buildLuau(b: *Build, target: Build.ResolvedTarget, optimize: std.builtin.Opti
         .version = std.SemanticVersion{ .major = 0, .minor = 607, .patch = 0 },
     });
 
+    lib.addInclduePath(upstream.path("CodeGen/include"));
     lib.addIncludePath(upstream.path("Common/include"));
     lib.addIncludePath(upstream.path("Compiler/include"));
     lib.addIncludePath(upstream.path("Ast/include"));
@@ -546,6 +548,43 @@ const luajit_vm = luajit_lib ++ [_][]const u8{
 };
 
 const luau_source_files = [_][]const u8{
+    "CodeGen/src/AssemblyBuilderA64.cpp",
+    "CodeGen/src/AssemblyBuilderX64.cpp",
+    "CodeGen/src/BytecodeAnalysis.cpp",
+    "CodeGen/src/BytecodeSummary.cpp",
+    "CodeGen/src/CodeAllocator.cpp",
+    "CodeGen/src/CodeBlockUnwind.cpp",
+    "CodeGen/src/CodeGen.cpp",
+    "CodeGen/src/CodeGenA64.cpp",
+    "CodeGen/src/CodeGenAssembly.cpp",
+    "CodeGen/src/CodeGenContext.cpp",
+    "CodeGen/src/CodeGenUtils.cpp",
+    "CodeGen/src/CodeGenX64.cpp",
+    "CodeGen/src/EmitBuiltinsX64.cpp",
+    "CodeGen/src/EmitCommonX64.cpp",
+    "CodeGen/src/EmitInstructionX64.cpp",
+    "CodeGen/src/IrAnalysis.cpp",
+    "CodeGen/src/IrBuilder.cpp",
+    "CodeGen/src/IrCallWrapperX64.cpp",
+    "CodeGen/src/IrDump.cpp",
+    "CodeGen/src/IrLoweringA64.cpp",
+    "CodeGen/src/IrLoweringX64.cpp",
+    "CodeGen/src/IrRegAllocA64.cpp",
+    "CodeGen/src/IrRegAllocX64.cpp",
+    "CodeGen/src/IrTranslateBuiltins.cpp",
+    "CodeGen/src/IrTranslation.cpp",
+    "CodeGen/src/IrUtils.cpp",
+    "CodeGen/src/IrValueLocationTracking.cpp",
+    "CodeGen/src/NativeProtoExecData.cpp",
+    "CodeGen/src/NativeState.cpp",
+    "CodeGen/src/OptimizeConstProp.cpp",
+    "CodeGen/src/OptimizeDeadStore.cpp",
+    "CodeGen/src/OptimizeFinalX64.cpp",
+    "CodeGen/src/SharedCodeAllocator.cpp",
+    "CodeGen/src/UnwindBuilderDwarf2.cpp",
+    "CodeGen/src/UnwindBuilderWin.cpp",
+    "CodeGen/src/lcodegen.cpp",
+
     "Compiler/src/BuiltinFolding.cpp",
     "Compiler/src/Builtins.cpp",
     "Compiler/src/BytecodeBuilder.cpp",
