@@ -201,7 +201,7 @@ fn buildLuau(b: *Build, target: Build.ResolvedTarget, optimize: std.builtin.Opti
         .version = std.SemanticVersion{ .major = 0, .minor = 607, .patch = 0 },
     });
 
-    lib.addInclduePath(upstream.path("CodeGen/include"));
+    lib.addIncludePath(upstream.path("CodeGen/include"));
     lib.addIncludePath(upstream.path("Common/include"));
     lib.addIncludePath(upstream.path("Compiler/include"));
     lib.addIncludePath(upstream.path("Ast/include"));
