@@ -2982,6 +2982,16 @@ pub const Lua = opaque {
         lua.requireF(c.LUA_BITLIBNAME, c.luaopen_bit32, true);
     }
 
+    /// Sandbox the Lua environment
+    pub fn sandbox(lua: *Lua) void {
+        c.luaL_sandbox(@ptrCast(lua));
+    }
+
+    /// Sandbox the Lua thread
+    pub fn sandboxThread(lua: *Lua) void {
+        c.luaL_sandboxthread(@ptrCast(lua));
+    }
+
     /// Returns if given typeinfo is a string type
     fn isTypeString(typeinfo: std.builtin.Type.Pointer) bool {
         const childinfo = @typeInfo(typeinfo.child);
