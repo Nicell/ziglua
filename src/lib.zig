@@ -7,6 +7,7 @@ const c = @cImport({
 
     if (lang != .luau) @cInclude("lauxlib.h");
     if (lang == .luau) @cInclude("luacode.h");
+    if (lang == .luau) @cInclude("luaucodegen.h");
     if (lang == .luajit) @cInclude("luajit.h");
 });
 
@@ -2990,6 +2991,21 @@ pub const Lua = opaque {
     /// Sandbox the Lua thread
     pub fn sandboxThread(lua: *Lua) void {
         c.luaL_sandboxthread(@ptrCast(lua));
+    }
+
+    /// Checks if code generation is supported
+    pub fn codegenSupported() bool {
+        return c.luau_codegen_supported() == 1;
+    }
+
+    /// Create a code generator instance
+    pub fn codegenCreate(lua: *Lua) void {
+        c.luau_codegen_create(@ptrCast(lua));
+    }
+
+    /// Build the targeted function
+    pub fn codegenCompile(lua: *Lua, index: i32) void {
+        c.luau_codegen_compile(@ptrCast(lua), index);
     }
 
     /// Returns if given typeinfo is a string type
